@@ -13,7 +13,8 @@ app = Flask(__name__)
 #########################
 # some global variables #
 #########################
-current_user = CurrentUser(first_name='Erick', last_name='Rubi', email='erub03@gmail.com', username='erub03')
+current_user = CurrentUser(
+    first_name='Erick', last_name='Rubi', email='erub03@gmail.com', username='erub03')
 
 quotes = (
     '“We May Encounter Many Defeats But We Must Not Be Defeated.” – Maya Angelou',
@@ -28,9 +29,11 @@ quotes = (
 ##############
 # Exercise 1 #
 ##############
+
+
 @app.route('/')
 def exercise1():
-    return 'Hello World!'
+    return f"Hi, {current_user.first_name}!"
 
 
 ##############
@@ -40,26 +43,32 @@ def exercise1():
 def exercise2():
     return render_template(
         'quote-of-the-day.html',
-        user=current_user
+        user=current_user,
+        quote=random.choice(quotes)
     )
 
 ##############
 # Exercise 3 #
 ##############
+
+
 @app.route('/restaurant-data/')
 @app.route('/restaurant-data')
 def exercise3():
     search_term = 'pizza'
     location = 'Evanston, Il'
-    url = 'https://www.apitutor.org/yelp/simple/v3/businesses/search?location={0}&term={1}'.format(location, search_term)
+    url = 'https://www.apitutor.org/yelp/simple/v3/businesses/search?location={0}&term={1}'.format(
+        location, search_term)
     response = requests.get(url)
     data = response.json()
-    pprint(data) # for debugging -- prints the result to the command line
+    pprint(data)  # for debugging -- prints the result to the command line
     return json.dumps(data)
 
 ##############
 # Exercise 4 #
 ##############
+
+
 @app.route('/restaurant/')
 @app.route('/restaurant')
 def exercise4():
@@ -68,12 +77,12 @@ def exercise4():
     search_term = args.get('term')
     if not (location and search_term):
         return '"location" and "term" are required query parameters'
-    
-    
-    url = 'https://www.apitutor.org/yelp/simple/v3/businesses/search?location={0}&term={1}'.format(location, search_term)
+
+    url = 'https://www.apitutor.org/yelp/simple/v3/businesses/search?location={0}&term={1}'.format(
+        location, search_term)
     response = requests.get(url)
     restaurants = response.json()
-    pprint(restaurants[0]) # for debugging
+    pprint(restaurants[0])  # for debugging
     return render_template(
         'restaurant.html',
         user=current_user,
@@ -81,6 +90,7 @@ def exercise4():
         location=location,
         restaurant=restaurants[0]
     )
+
 
 @app.route('/cards/')
 @app.route('/cards')
@@ -90,9 +100,5 @@ def photos_static():
     search_term = args.get('term')
     if not (location and search_term):
         return '"location" and "term" are required query parameters'
-    
-    
+
     return render_template('cards.html')
-
-
-    
