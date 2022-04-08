@@ -35,3 +35,19 @@ main {
 @media only screen and (max-width: 600px) {
     /* Media queries go here */
 }
+
+.card {
+  width: 300px;
+  border: 1px solid #eee;
+  padding: 1rem;
+}
+
+.card img {
+  max-width: 100%;
+}
+
+.card__info {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}

@@ -13,9 +13,28 @@
     <main>
         <p>Search location: {{location}}</p>
         <p>Search term: {{search_term or 'None Specified'}}</p>
-        <p>Data: {{ restaurant }}</p>
+        <!-- <p>Data: {{ restaurant }}</p> -->
         <h2>Top Restaurant:</h2> 
-        <p>Name: {{ restaurant.get('name') }}</p>
+
+        <div class="card">
+          <h1 class="card__name">
+            {{ restaurant.get('name') }}
+          </h1>
+
+          <img src="{{ restaurant.get('image_url') }}" />
+          <p>{{ restaurant.get('display_address') }}</p>
+
+          <div class="card__info">
+            Price: {{ restaurant.get('price') }}
+          </div>
+          <div class="card__info">
+            Price: {{ restaurant.get('rating') }}
+          </div>
+          <div class="card__info">
+            # Reviews: {{ restaurant.get('review_count') }}
+          </div>
+        </div>
+        <!-- <p>Name: </p> -->
     </main>
 </body>
 </html>
